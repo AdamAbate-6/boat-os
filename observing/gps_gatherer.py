@@ -6,7 +6,7 @@ class GpsGatherer:
         # Listen on port 2947 (gpsd) of localhost
         self.session = gps.gps("localhost", "2947")
         self.session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
-        #Input GPS data, output integer in format hoursminutessecondsmilliseconds
+        #Input GPS time, output integer in format hoursminutessecondsmilliseconds
         self.rawToAct = lambda x : int(x[11:13] + x[14:16] + x[17:19] + x[20:23])
     
     def gather(self):
