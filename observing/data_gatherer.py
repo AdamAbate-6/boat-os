@@ -1,6 +1,6 @@
 import csv
-import gps_gatherer
-import 9dof_gatherer
+import gps_gatherer as gg
+import 9dof_gatherer as dg
 
 class DataGatherer:
 
@@ -24,9 +24,9 @@ class DataGatherer:
 
             #Format csv and write data
             writer.writeheader()
-            writer.writerow({'gps_lat': data[0][0], 'gps_lon': data[0][1], '9dof_m_x': data[1][0][0], '9dof_m_y': data[1][0][1], '9dof_m_z': data[1][0][2]})
+            writer.writerow({'gps_time': data[0][0], 'gps_lat': data[0][1], 'gps_lon': data[0][2], '9dof_m_x': data[1][0][0], '9dof_m_y': data[1][0][1], '9dof_m_z': data[1][0][2]})
 
 if __name__ == "__main__":
-    dgat = DataGatherer(gpsGatherer, 9DofGatherer)
+    dgat = DataGatherer(gg.GpsGatherer(), dg.9DofGatherer())
     data = dgat.gather()
     dgat.writeToCSV(data)
