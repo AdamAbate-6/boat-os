@@ -10,7 +10,7 @@ class GpsGatherer:
         self.rawToAct = lambda x : int(x[11:13] + x[14:16] + x[17:19] + x[20:23])
     
     def gather(self):
-        reports = []
+        data = []
 
         # Number of empty reports -- specific to GPS module
         numInitReports = 3
@@ -27,8 +27,7 @@ class GpsGatherer:
                     if (hasattr(report, 'time') and hasattr(report, 'lat') and hasattr(report, 'lon')):
                         #print(report.time)
                         #print("Lat/Lon: " + str(report.lat) + ", " + str(report.lon))
-                        report = [report.time, report.lat, report.lon]
-                        reports.append(report)
+                        data = [report.time, report.lat, report.lon]
             except KeyError:
                 pass
             except KeyboardInterrupt:
@@ -37,4 +36,4 @@ class GpsGatherer:
                 self.session = None
                 print("GPSD has terminated")
         
-        return reports
+        return data
