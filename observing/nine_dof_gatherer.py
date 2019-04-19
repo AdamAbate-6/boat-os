@@ -11,5 +11,8 @@ class NineDOFGatherer:
         self.sensor = adafruit_fxos8700.FXOS8700(self.i2c)
 
     def gather(self):
-        return [self.sensor.magnetometer, self.sensor.accelerometer]
+        data = []
+        data.append(self.sensor.magnetometer)
+        data.append(self.sensor.accelerometer)
+        return data
 
